@@ -1,0 +1,48 @@
+EXEC AddStudent @StudentID=17 ,@StudentName='Kareem',@StudentAge=19,@StudentAddress='Cairo', @StudentPhone='01098765432';
+EXEC AddStudent @StudentID=18 ,@StudentName='Laila',@StudentAge=21,@StudentAddress='Giza', @StudentPhone='01234567890';
+EXEC AddStudent @StudentID=19 ,@StudentName='Omar',@StudentAge=23,@StudentAddress='Alexandria', @StudentPhone='01156789345';
+EXEC AddStudent @StudentID=20 ,@StudentName='Hana',@StudentAge=18,@StudentAddress='Mansoura', @StudentPhone='01567893421';
+EXEC AddStudent @StudentID=21 ,@StudentName='Youssef',@StudentAge=25,@StudentAddress='Tanta', @StudentPhone='01023456789';
+EXEC AddStudent @StudentID=22 ,@StudentName='Farah',@StudentAge=22,@StudentAddress='Aswan', @StudentPhone='01187654321';
+EXEC AddStudent @StudentID=23 ,@StudentName='Samir',@StudentAge=20,@StudentAddress='Port Said', @StudentPhone='01265437890';
+EXEC AddStudent @StudentID=24 ,@StudentName='Noor',@StudentAge=24,@StudentAddress='Suez', @StudentPhone='01534567892';
+EXEC AddStudent @StudentID=25 ,@StudentName='Hassan',@StudentAge=26,@StudentAddress='Fayoum', @StudentPhone='01076543289';
+EXEC AddStudent @StudentID=26 ,@StudentName='Salma',@StudentAge=27,@StudentAddress='Ismailia', @StudentPhone='01298765431';
+EXEC AddStudent @StudentID=27 ,@StudentName='Mahmoud',@StudentAge=28,@StudentAddress='Luxor', @StudentPhone='01123456788';
+EXEC AddStudent @StudentID=28 ,@StudentName='Nadia',@StudentAge=29,@StudentAddress='Hurghada', @StudentPhone='01587654329';
+INSERT INTO stu_track VALUES (1,17);
+INSERT INTO stu_track VALUES (1,18);
+INSERT INTO stu_track VALUES (1,19);
+INSERT INTO stu_track VALUES (1,20);
+INSERT INTO stu_track VALUES (1,21);
+INSERT INTO stu_track VALUES (1,22);
+INSERT INTO stu_track VALUES (1,23);
+INSERT INTO stu_track VALUES (1,24);
+INSERT INTO stu_track VALUES (1,25);
+INSERT INTO stu_track VALUES (1,26);
+INSERT INTO stu_track VALUES (1,27);
+INSERT INTO stu_track VALUES (1,28);
+EXEC AddInstructor @InstructorID=6, @InstructorName='Nour', @Age=35, @Address='Cairo';
+EXEC AddInstructor @InstructorID=7, @InstructorName='Hassan', @Age=42, @Address='Giza';
+EXEC AddInstructor @InstructorID=8, @InstructorName='Laila', @Age=38, @Address='Mansoura';
+EXEC AddInstructor @InstructorID=9, @InstructorName='Kareem', @Age=45, @Address='Tanta';
+EXEC AddInstructor @InstructorID=10, @InstructorName='Salma', @Age=39, @Address='Ismailia';
+EXEC AddInstructor @InstructorID=11, @InstructorName='Omar', @Age=50, @Address='Suez';
+EXEC AddInstructor @InstructorID=12, @InstructorName='Farah', @Age=37, @Address='Port Said';
+EXEC AddInstructor @InstructorID=13, @InstructorName='Mahmoud', @Age=41, @Address='Fayoum';
+EXEC AddInstructor @InstructorID=14, @InstructorName='Nadia', @Age=44, @Address='Hurghada';
+EXEC AddInstructor @InstructorID=15, @InstructorName='Youssef', @Age=36, @Address='Luxor';
+EXEC AddInstructor @InstructorID=16, @InstructorName='Hana', @Age=48, @Address='Aswan';
+EXEC AddInstructor @InstructorID=17, @InstructorName='Samir', @Age=43, @Address='Alexandria';
+EXEC AddInstructor @InstructorID=18, @InstructorName='Noor', @Age=49, @Address='Sharm El-Sheikh';
+EXEC AddInstructor @InstructorID=19, @InstructorName='Ahmed', @Age=46, @Address='Sohag';
+EXEC AddInstructor @InstructorID=20, @InstructorName='Marwa', @Age=40, @Address='Minya';
+UPDATE dbo.Student
+SET TrackId = (
+    SELECT TrackId FROM dbo.Stu_Track 
+    WHERE dbo.Stu_Track.StudentID = dbo.Student.StudentID
+)
+WHERE EXISTS (
+    SELECT 1 FROM dbo.Stu_Track 
+    WHERE dbo.Stu_Track.StudentID = dbo.Student.StudentID
+);
